@@ -33,9 +33,9 @@ class BottombarState extends State<Bottombar> {
       child: Consumer<BBProvider>(
   builder: (context, provider, child) {
   return ListView.builder(
-        itemCount: 3,
+        itemCount: 4,
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: displayWidth * .09),
+        padding: EdgeInsets.symmetric(horizontal: displayWidth * .02),
         itemBuilder: (context, index) => InkWell(
           onTap: () {
             provider.setcurrentindex(index);
@@ -50,13 +50,13 @@ class BottombarState extends State<Bottombar> {
                 curve: Curves.fastLinearToSlowEaseIn,
                 width: index == provider.currentIndex
                     ? displayWidth * .32
-                    : displayWidth * .25,
+                    : displayWidth * .18,
                 alignment: Alignment.center,
                 child: AnimatedContainer(
                   duration: Duration(seconds: 1),
                   curve: Curves.fastLinearToSlowEaseIn,
                   height: index == provider.currentIndex ? displayWidth * .12 : 0,
-                  width: index == provider.currentIndex ? displayWidth * .40 : 0,
+                  width: index == provider.currentIndex ? displayWidth * .32 : 0,
                   decoration: BoxDecoration(
                     color: index == provider.currentIndex
                         ? Color(0xff4C4DDC).withOpacity(.2)
@@ -70,7 +70,7 @@ class BottombarState extends State<Bottombar> {
                 curve: Curves.fastLinearToSlowEaseIn,
                 width: index == provider.currentIndex
                     ? displayWidth * .31
-                    : displayWidth * .25,
+                    : displayWidth * .20,
                 alignment: Alignment.center,
                 child: Stack(
                   children: [
@@ -132,12 +132,14 @@ class BottombarState extends State<Bottombar> {
     Icons.home_rounded,
     Icons.favorite_outlined,
     Icons.settings_rounded,
+    Icons.wallet,
   ];
 
   List<String> listOfStrings = [
     'Home',
     'Favorite',
     'Settings',
+    'Wallet',
   ];
 }
 

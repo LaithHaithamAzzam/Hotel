@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel/HomeScreen/Favorite.dart';
 import 'package:hotel/HomeScreen/HomeScreen_User.dart';
+import 'package:hotel/HomeScreen/MyWallet.dart';
 import 'package:provider/provider.dart';
 
 import '../Hotel/Detail_Hotel_User.dart';
@@ -20,10 +21,16 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: Bottombar(),
-        body : Consumer<BBProvider>(
-      builder: (context, provider, child) {
-        return  provider.currentIndex == 0 ? UserHomeScreen() : provider.currentIndex == 1?FavoriteScreen():MyProf();
-      },
-    ));
+        body: Consumer<BBProvider>(
+          builder: (context, provider, child) {
+            return provider.currentIndex == 0
+                ? UserHomeScreen()
+                : provider.currentIndex == 1
+                    ? FavoriteScreen()
+                    : provider.currentIndex == 2
+                        ? MyProf()
+                        : Mywallet();
+          },
+        ));
   }
 }
