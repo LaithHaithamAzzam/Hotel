@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../MyWidgite/BottomSheet.dart';
 import '../MyWidgite/textread.dart';
 class Detile_Hotel extends StatelessWidget {
-   Detile_Hotel({required this.Herotag , super.key});
-   String Herotag;
+   Detile_Hotel({this.Herotag , super.key});
+   String? Herotag;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

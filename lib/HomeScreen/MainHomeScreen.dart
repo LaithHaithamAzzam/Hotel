@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel/HomeScreen/Favorite.dart';
 import 'package:hotel/HomeScreen/HomeScreen_User.dart';
-import 'package:hotel/HomeScreen/MyWallet.dart';
+import 'package:hotel/Wallet/MyWallet.dart';
 import 'package:provider/provider.dart';
 
 import '../Hotel/Detail_Hotel_User.dart';

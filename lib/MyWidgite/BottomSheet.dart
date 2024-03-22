@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../Wallet/SelectedPay.dart';
 import 'DropDownlist_Rooms.dart';
 class Bottomsheet extends StatelessWidget {
   const Bottomsheet({super.key});
@@ -24,13 +25,15 @@ class Bottomsheet extends StatelessWidget {
              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
              children: [
                DropdownMenuExample(),
-               Text("SP 190.000 /Night",style:TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),),
+               Text("SP 180.000 /Night",style:TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),),
                Padding(
                  padding: const EdgeInsets.only(left: 20.0 , right: 20.0),
                  child: Hero(
                    tag: "BookBTN",
                    child: TextButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => SelectPay(),));
+                      },
                      child: Text("Booking Now"),
                      style: ButtonStyle(
                          foregroundColor: MaterialStatePropertyAll(Colors.white),
