@@ -8,3 +8,12 @@ String CreateHotel = "/addHotel";
 String Showimage = "/showImage";
 String getHotel = "/getHotel";
 String addLocation = "/addLocation";
+
+
+
+
+
+
+
+
+

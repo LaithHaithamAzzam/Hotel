@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hotel/controller/api.dart';
 import 'package:hotel/locale/local_controller.dart';
 import 'package:hotel/main.dart';
 import 'package:hotel/view/HotelScreen/HotelSettings.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../Providers/customerInformationProvider.dart';
 import '../MyWidgite/buttons.dart';
+import '../SplashScreen/LoginAndRegister.dart';
 
 class HotelProfile extends StatefulWidget {
   const HotelProfile({super.key});
@@ -42,7 +47,7 @@ class _HotelProfileState extends State<HotelProfile> {
               borderRadius: BorderRadius.circular(10)),
           child: Center(
             child: Image.network(
-              "https://th.bing.com/th/id/R.b1ec5bc05f529d4a6c1696b21a515450?rik=7sBupPNAA9ptnw&pid=ImgRaw&r=0",
+            "$SERVER""$Showimage/${ Provider.of<customerInformationProvider>(context , listen:  false).imageid}"
             ),
           ),
         ),
@@ -90,7 +95,11 @@ class _HotelProfileState extends State<HotelProfile> {
           padding: EdgeInsets.only(right: _w * 0.1, left: _w * 0.1),
           child: MaterialButtonCustom(
             materialtext: "Sign Out".tr,
-            onpressed: () {},
+            onpressed: () async{
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.clear();
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => loginAndRegisterScreen(),));
+            },
             color: const Color.fromARGB(255, 228, 121, 121),
           ),
         ),

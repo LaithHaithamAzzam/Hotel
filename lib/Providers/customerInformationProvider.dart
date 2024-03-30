@@ -4,10 +4,12 @@ class customerInformationProvider extends ChangeNotifier{
   String name = '';
   String username= '';
   String token = '';
-  setUserInfo(String Name, String Token,String userName) {
+  String imageid = '';
+  setUserInfo(String Name, String Token,String userName,String Imageid) {
     name = Name;
     username=userName;
     token = Token;
+    imageid =Imageid;
     notifyListeners();
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:hotel/Icons/my_hoteli_icons.dart';
+import 'package:hotel/controller/api.dart';
 import 'package:provider/provider.dart';
+import '../../Providers/HotelRoomsProvider.dart';
 import '../../Providers/NotificationProvider.dart';
 import '../HomeScreen/NotificationScreen.dart';
 import '../MyWidgite/BottomSheet.dart';
@@ -140,7 +142,7 @@ class Detile_Hotel extends StatelessWidget {
                                   BorderRadius.all(Radius.circular(6)),
                               image: DecorationImage(
                                   image: NetworkImage(
-                                    "https://www.shutterstock.com/image-illustration/hotel-sign-stars-3d-illustration-260nw-197337320.jpg",
+                                      "$SERVER""$Showimage/${ Provider.of<HotelRoomsProvider>(context , listen:  false).imageId}"
                                   ),
                                   fit: BoxFit.fill)),
                         ),
@@ -165,45 +167,46 @@ class Detile_Hotel extends StatelessWidget {
                                           color: Color(0xffEDEDED), width: 1.5),
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(40))))),
-                          icon: Icon(
+                          icon: Provider.of<HotelRoomsProvider>(context , listen: false).isFav == true ?Icon(
                             MyHoteli.love,
-                          ),
+                          ):
+                          Icon(Icons.favorite_outline),
                         ),
                       ),
                     ],
                   ),
                 ),
                 Container(
+                  alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width,
                   height: 60,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: EdgeInsets.only(right: 5, top: 5),
-                          decoration: BoxDecoration(
-                              color: Color(0xffF5F5FF),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8))),
-                          child: Container(
-                            margin:
-                                EdgeInsets.only(bottom: 5, right: 5, left: 5),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(Icons.star, color: Color(0xffFFD33C)),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 8.0),
-                                  child: Text("5.0",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                      itemCount: 10),
+                  child: Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(right: 5, top: 5),
+                    decoration: BoxDecoration(
+                        color: Color(0xffF5F5FF),
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(8))),
+                    child: Container(
+                      margin:
+                      EdgeInsets.only(bottom: 5, right: 5, left: 5),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(Icons.star, color: Color(0xffFFD33C)),
+                          Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Text(
+                                Provider.of<HotelRoomsProvider>(context , listen: false).rate == null ?
+                                "0.0":
+                                "${Provider.of<HotelRoomsProvider>(context , listen: false).rate}.0",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold)),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width - 20,
@@ -214,7 +217,7 @@ class Detile_Hotel extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("The Burj Alreem Hotel",
+                          Text("${Provider.of<HotelRoomsProvider>(context , listen: false).name}",
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           Padding(
                             padding: EdgeInsets.only(
@@ -222,7 +225,7 @@ class Detile_Hotel extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  "SP 180.000",
+                                  "SP ${Provider.of<HotelRoomsProvider>(context , listen: false).minPrice}",
                                   style: TextStyle(
                                       color: Color(0xff4C4DDC),
                                       fontWeight: FontWeight.bold),
@@ -252,7 +255,7 @@ class Detile_Hotel extends StatelessWidget {
                         size: 23,
                       ),
                       Text(
-                        "Swaidaa - Qanawat",
+                        "${Provider.of<HotelRoomsProvider>(context , listen: false).country}"" - ${Provider.of<HotelRoomsProvider>(context , listen: false).city}",
                         style:
                             TextStyle(color: Color(0xff878787), fontSize: 13),
                       )
@@ -263,7 +266,7 @@ class Detile_Hotel extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                   child: Row(
                     children: [
-                      Text("Description",
+                      Text(  "${Provider.of<HotelRoomsProvider>(context , listen: false).detail}",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
@@ -271,7 +274,8 @@ class Detile_Hotel extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   child: ExpandableText(
-                      "The Burj Alreem Hotel, Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla "),
+                    "${Provider.of<HotelRoomsProvider>(context , listen: false).locationDetail}",
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),

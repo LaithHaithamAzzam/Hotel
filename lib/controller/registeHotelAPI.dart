@@ -27,7 +27,6 @@ class CreateHotelAccount{
         "roomDefault":Roomtype,
         "minPrice":MinimumPrice,
         "image": await MultipartFile.fromFile(image.path),
-
       });
       var Res = await Dio().post("${global.SERVER}${global.CreateHotel}",
         options: Options(
@@ -38,6 +37,7 @@ class CreateHotelAccount{
         ),
         data:formData
       );
+      print(Res.data);
       if(Res.data['state'] == true){
         Navigator.of(context).pop();
         Navigator.of(context).pushAndRemoveUntil(

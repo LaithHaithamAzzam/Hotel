@@ -36,18 +36,19 @@ CreateAccount(this.context);
       if(Res.data['state'] == true){
         await prefs.setString("Token", "${Res.data['token']}");
         await prefs.setString("Name", "${Res.data['name']}");
+        await prefs.setString("username", "${userName}");
         await prefs.setString("Islogin", "true");
         await prefs.setString("rool", "user");
+        await prefs.setString("imageid", "${Res.data['imageId']}");
         await allHotelAPI(context).allHotel();
         Navigator.of(context).pop();
-        Provider.of<customerInformationProvider>(context , listen:  false).setUserInfo("${Res.data['name']}", "${Res.data['token']}","$userName");
+        Provider.of<customerInformationProvider>(context , listen:  false).setUserInfo("${Res.data['name']}", "${Res.data['token']}","$userName","${Res.data['imageId']}");
         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomeScreen(),), (route) => false);
       }
       else{
         print("mdslklds");
       }
     }catch (e){
-
       print("register hotel field");
       print(e);
     }

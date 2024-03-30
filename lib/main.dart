@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hotel/Providers/HotelRoomsProvider.dart';
 import 'package:hotel/Providers/allHotelProvider.dart';
 import 'package:hotel/locale/local.dart';
 import 'package:hotel/locale/local_controller.dart';
@@ -45,6 +46,9 @@ Future<void> main() async {
     ),
     ChangeNotifierProvider(
       create: (context) => allHotelProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => HotelRoomsProvider(),
     ),
   ], child: MyApp()));
 }

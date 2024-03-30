@@ -30,26 +30,28 @@ class LoginAccount{
 
       if(Res.data['state'] == true){
         print(Res.data);
-        await prefs.setString("Name", "${Res.data['user'][0]}");
+        await prefs.setString("Name", "${Res.data['name']}");
         await prefs.setString("Token", "${Res.data['token']}");
         await prefs.setString("username", "$userName");
         await prefs.setString("Islogin", "true");
-        await prefs.setString("rool", "${Res.data['user']['roll']}");
-        print( "${Res.data['user']['roll']}");
-
-       if(Res.data['user']['roll'] == "user"){
+        await prefs.setString("rool", "${Res.data['roll']}");
+        await prefs.setString("imageid", "${Res.data['imageId']}");
+        print( "${Res.data['roll']}");
+       if(Res.data['roll'] == "user"){
          await allHotelAPI(context).allHotel();
+         Provider.of<customerInformationProvider>(context , listen:  false).setUserInfo("${Res.data['name']}", "${Res.data['token']}","${Res.data['userName']}","${Res.data['imageId']}");
          Navigator.of(context).pop();
-         Provider.of<customerInformationProvider>(context , listen:  false).setUserInfo("${Res.data['user'][0]}", "${Res.data['token']}","$userName");
          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomeScreen(),), (route) => false);
-       }else  if(Res.data['user']['roll'] == "hotel"){
+       }else  if(Res.data['roll'] == "hotel"){
+         Provider.of<customerInformationProvider>(context , listen:  false).setUserInfo("${Res.data['name']}", "${Res.data['token']}","${Res.data['userName']}","${Res.data['imageId']}");
          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HotelProfile(),), (route) => false);
-       }else  if(Res.data['user']['roll'] == "admin"){
+       }else  if(Res.data['roll'] == "admin"){
          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => AdminScreen(),), (route) => false);
        }
         }
       else{
         Navigator.of(context).pop();
+        print(Res.data);
       }
 
     }catch (e){
