@@ -1,17 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hotel/Providers/BottombarProvider.dart';
 import 'package:hotel/Providers/customerInformationProvider.dart';
 import 'package:hotel/controller/api.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../locale/local_controller.dart';
+import '../../main.dart';
 import '../HomeScreen/MainHomeScreen.dart';
 import '../SplashScreen/LoginAndRegister.dart';
 
-class MyProf extends StatelessWidget {
+
+
+class MyProf extends StatefulWidget {
   const MyProf({super.key});
 
   @override
+  State<MyProf> createState() => _MyProfState();
+}
+
+class _MyProfState extends State<MyProf> {
+
+  @override
   Widget build(BuildContext context) {
+    localeController lc = Get.find();
+    print(lc.init);
+
     return WillPopScope(
       onWillPop: () {
         if(Provider.of<BBProvider>(context , listen: false).currentIndex==2){
@@ -83,8 +97,22 @@ class MyProf extends StatelessWidget {
                    ,Padding(
                      padding: const EdgeInsets.only(top: 10.0 , bottom: 10.0),
                      child: TextButton(
-                       onPressed: (){},
-                       child: Text("Language"),
+                       onPressed: (){
+                         if (lang!.getString("lang") == null) {
+                           String x = Get.deviceLocale.toString();
+                           lang!.setString("lang", x);
+
+                           print(Get.deviceLocale);
+                         }
+                         if (lang!.getString("lang") == "ar_SY") {
+                           lc.changelang("en_US");
+                           print("english");
+                         } else if (lang!.getString("lang") == "en_US") {
+                           lc.changelang("ar_SY");
+                           print("arabic");
+                         }
+                       },
+                       child: Text('Language'.tr),
                        style: ButtonStyle(
                            foregroundColor: MaterialStatePropertyAll(Colors.white),
                            backgroundColor:MaterialStatePropertyAll(Color(0xff4C4DDC)),

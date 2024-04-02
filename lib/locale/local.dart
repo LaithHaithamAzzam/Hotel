@@ -34,6 +34,9 @@ class MyLocal implements Translations {
           'Customer or Hotel Admin ': 'إمّا زبون أو مدير فندق',
           'I`m a Customer': 'أنا زبون',
           'I`m a Hotel Admin': 'أنا مدير فندق',
+          'Edite Detail': 'تعديل التفاصيل',
+          'Edite Location Detail':'تعديل تفاصيل الموقع',
+          'My Rooms':'غرفي'
         },
         "en": {
           'Login or Create Account': 'Login or Create Account',
@@ -65,6 +68,9 @@ class MyLocal implements Translations {
           'Customer or Hotel Admin ': 'Customer or Hotel Admin ',
           'I`m a Customer': 'I`m a Customer',
           'I`m a Hotel Admin': 'I`m a Hotel Admin',
+          'Edite Detail': 'Edite Detail',
+          'Edite Location Detail': 'Edite Location Detail',
+          'My Rooms':'My Rooms'
         }
       };
 }

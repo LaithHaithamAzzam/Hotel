@@ -8,7 +8,7 @@ class customerFavouriteAPI {
   BuildContext context;
   Dio dio = Dio();
   customerFavourite() async {
-    String myurl = "${global.SERVER}/";
+    String myurl = "${global.SERVER}";
     try {
       var response = await dio.get(myurl,
           options: Options(headers: {

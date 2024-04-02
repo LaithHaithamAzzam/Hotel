@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:hotel/Icons/my_hoteli_icons.dart';
+import 'package:hotel/Providers/allHotelProvider.dart';
 import 'package:hotel/controller/api.dart';
 import 'package:provider/provider.dart';
 import '../../Providers/HotelRoomsProvider.dart';
 import '../../Providers/NotificationProvider.dart';
+import '../../Providers/roomTypesProvider.dart';
+import '../../controller/FavouriteAPIs.dart';
+import '../../controller/HotelRoomsTypes.dart';
 import '../HomeScreen/NotificationScreen.dart';
 import '../MyWidgite/BottomSheet.dart';
 import '../MyWidgite/textread.dart';
 
 class Detile_Hotel extends StatelessWidget {
-  Detile_Hotel({this.Herotag, super.key});
+  Detile_Hotel({this.Herotag,required this.index, super.key});
   String? Herotag;
+  int index;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,10 +25,14 @@ class Detile_Hotel extends StatelessWidget {
         child: Hero(
           tag: "BookBTN",
           child: TextButton(
-            onPressed: () => showModalBottomSheet(
-              context: context,
-              builder: (context) => Bottomsheet(),
-            ),
+            onPressed: ()async{
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => Bottomsheet(),
+
+              );
+
+            },
             child: Text("Booking Now"),
             style: ButtonStyle(
                 foregroundColor: MaterialStatePropertyAll(Colors.white),
@@ -144,13 +153,21 @@ class Detile_Hotel extends StatelessWidget {
                                   image: NetworkImage(
                                       "$SERVER""$Showimage/${ Provider.of<HotelRoomsProvider>(context , listen:  false).imageId}"
                                   ),
-                                  fit: BoxFit.fill)),
+                                  fit: BoxFit.cover)),
                         ),
                       ),
-                      Hero(
+                      Consumer<allHotelProvider>(
+  builder: (context, allhotelprovider, child) {
+  return Hero(
                         tag: "Fev${Herotag}",
                         child: IconButton(
-                          onPressed: () {},
+                            onPressed: () async {
+                              if(allhotelprovider.data?[index].isFav==false){
+                                await FavouriteAPIs(context).addFavourite(int.parse((allhotelprovider.data?[index].userId).toString()),index);
+                              }else{
+                                await FavouriteAPIs(context).DeleteFavourite(int.parse((allhotelprovider.data?[index].userId).toString()),index);
+                              }
+                            },
                           style: ButtonStyle(
                               iconSize: MaterialStatePropertyAll(20),
                               minimumSize:
@@ -167,12 +184,14 @@ class Detile_Hotel extends StatelessWidget {
                                           color: Color(0xffEDEDED), width: 1.5),
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(40))))),
-                          icon: Provider.of<HotelRoomsProvider>(context , listen: false).isFav == true ?Icon(
+                          icon: allhotelprovider.data?[index].isFav == true ?Icon(
                             MyHoteli.love,
                           ):
                           Icon(Icons.favorite_outline),
                         ),
-                      ),
+                      );
+  },
+),
                     ],
                   ),
                 ),
@@ -266,15 +285,20 @@ class Detile_Hotel extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                   child: Row(
                     children: [
-                      Text(  "${Provider.of<HotelRoomsProvider>(context , listen: false).detail}",
+                      Text("Description",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  child: ExpandableText(
-                    "${Provider.of<HotelRoomsProvider>(context , listen: false).locationDetail}",
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 4.0 , right: 4.0),
+                    child: ExpandableText(
+                      "${Provider.of<HotelRoomsProvider>(context , listen: false).detail}"
+                      "\n - Location Description : ${Provider.of<HotelRoomsProvider>(context , listen: false).locationDetail}"
+                          "\n - Rooms type: ${Provider.of<RoomTypesProvider>(context,listen: false).data}",
+                    ),
                   ),
                 ),
                 Padding(

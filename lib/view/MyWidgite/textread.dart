@@ -21,7 +21,7 @@ class _ExpandableTextState extends State<ExpandableText>
           child: new ConstrainedBox(
               constraints: widget.isExpanded
                   ? new BoxConstraints()
-                  : new BoxConstraints(maxHeight: 60.0),
+                  : new BoxConstraints(maxHeight: 50.0),
               child: GestureDetector(
                 onTap:  () => setState(() => widget.isExpanded = false),
                 child: new Text(
@@ -37,7 +37,7 @@ class _ExpandableTextState extends State<ExpandableText>
             children: [
               new TextButton(
                 style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.white),foregroundColor: MaterialStatePropertyAll(Color(0xff4C4DDC))),
-              child: const Text('Read More...'),
+              child: const Text('Read More ...'),
               onPressed: () => setState(() => widget.isExpanded = true)),
             ],
           )

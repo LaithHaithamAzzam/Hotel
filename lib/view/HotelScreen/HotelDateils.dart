@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotel/view/MyWidgite/buttons.dart';
@@ -19,7 +17,6 @@ class HotelDetails extends StatefulWidget {
 }
 
 class _HotelDetailsState extends State<HotelDetails> {
-  TextEditingController roomType = TextEditingController();
   TextEditingController minimumPrice = TextEditingController();
   TextEditingController LocationDescription = TextEditingController();
   TextEditingController Description = TextEditingController();

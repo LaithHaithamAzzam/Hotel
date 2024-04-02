@@ -3,8 +3,8 @@ import 'package:hotel/controller/Addlocations.dart';
 
 class AddLocation extends StatelessWidget {
    AddLocation({super.key});
-   TextEditingController country = TextEditingController();
-   TextEditingController city = TextEditingController();
+   TextEditingController Country = TextEditingController(text: "UAE");
+   TextEditingController City = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +19,7 @@ class AddLocation extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
-                controller: country,
+                controller: Country,
                 decoration: InputDecoration(
                   enabledBorder:OutlineInputBorder(
                       borderSide: BorderSide(color:  Color.fromARGB(255, 76, 77, 220),style: BorderStyle.solid),
@@ -39,7 +39,7 @@ class AddLocation extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 28.0 , bottom: 28.0),
                 child: TextFormField(
-                  controller: city,
+                  controller: City,
                   decoration: InputDecoration(
                       enabledBorder:OutlineInputBorder(
                           borderSide: BorderSide(color:  Color.fromARGB(255, 76, 77, 220),style: BorderStyle.solid),
@@ -63,8 +63,9 @@ class AddLocation extends StatelessWidget {
                   backgroundColor:MaterialStatePropertyAll(Color.fromARGB(255, 76, 77, 220)),
                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(6))))
                 ),
-                  onPressed: (){
-                    AddLocationsAPI(context).addLocation(country.text,city.text);
+                  onPressed: ()async{
+                  await AddLocationsAPI(context).addLocation(Country.text,City.text);
+                  City.clear();
                   }, child: Text("Add Location",style: TextStyle(color:Colors.white,)))
             ],
           ),

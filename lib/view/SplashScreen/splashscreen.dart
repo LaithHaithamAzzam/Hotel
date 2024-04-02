@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:hotel/controller/HotelRoomsAPI.dart';
 import 'package:hotel/view/AdminScreen/Admin.dart';
 import 'package:hotel/view/HomeScreen/MainHomeScreen.dart';
+import 'package:hotel/view/HotelScreen/HotelHomeScreen.dart';
 import 'package:hotel/view/SplashScreen/LoginAndRegister.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../Providers/customerInformationProvider.dart';
 import '../../controller/AllHotelAPI.dart';
-import '../HotelScreen/HotelProfile.dart';
 
 
 
@@ -36,25 +36,18 @@ class _SplashscreenState extends State<Splashscreen> {
       Provider.of<customerInformationProvider>(context , listen:  false).setUserInfo("${Name}", "${token}","${username}","$imageid");
       if(rool == "user"){
        await allHotelAPI(context).allHotel();
-        new Timer(const Duration(seconds: 4), () {
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen(),));
-        });
       }else if(rool == "hotel"){
-        new Timer(const Duration(seconds: 4), () {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HotelProfile(),));
-        });
+        await hotelRoomsAPI(context).hotelRooms(DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day).toString(), DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day+1).toString());
+           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HotelHomeScreen(),));
       }else if(rool == "admin"){
         String? Tool = await prefs.getString("Token");
         print(Tool);
-        new Timer(const Duration(seconds: 4), () {
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AdminScreen(),));
-        });
       }
     }
     else {
-      new Timer(const Duration(seconds: 4), () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => loginAndRegisterScreen(),));
-      });
     }
   }
   initState() {

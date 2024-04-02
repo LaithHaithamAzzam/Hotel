@@ -9,7 +9,7 @@ class bookingRoomAPI {
   Dio dio = Dio();
   bookingRoom(int hotelID, String roomtype, int numberOfRoom,
       String bookingDate) async {
-    String myurl = "${global.SERVER}/";
+    String myurl = "${global.SERVER}";
     try {
       var response = await dio.post(myurl,
           data: {

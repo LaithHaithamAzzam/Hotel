@@ -2,7 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel/controller/AllHotelAPI.dart';
 import 'package:hotel/view/AdminScreen/Admin.dart';
-import 'package:hotel/view/HotelScreen/HotelProfile.dart';
+import 'package:hotel/view/HotelScreen/MainHotelScreen.dart';
+
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Providers/customerInformationProvider.dart';
@@ -44,7 +45,7 @@ class LoginAccount{
          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomeScreen(),), (route) => false);
        }else  if(Res.data['roll'] == "hotel"){
          Provider.of<customerInformationProvider>(context , listen:  false).setUserInfo("${Res.data['name']}", "${Res.data['token']}","${Res.data['userName']}","${Res.data['imageId']}");
-         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HotelProfile(),), (route) => false);
+         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => MainHotelHomeScreen(),), (route) => false);
        }else  if(Res.data['roll'] == "admin"){
          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => AdminScreen(),), (route) => false);
        }

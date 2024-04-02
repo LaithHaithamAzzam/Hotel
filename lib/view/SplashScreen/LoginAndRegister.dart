@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:hotel/view/SplashScreen/customerRegister.dart';
 import 'package:hotel/view/SplashScreen/login.dart';
-import 'package:hotel/view/SplashScreen/registerType.dart';
 import '../MyWidgite/buttons.dart';
 
 
@@ -62,7 +62,7 @@ class _loginAndRegisterScreenState extends State<loginAndRegisterScreen> {
           MaterialButtonCustom(
             materialtext: 'Create Account'.tr,
             onpressed: () {
-              Get.to(() => const registerType());
+              Get.to(() => const customerRegister());
             },
             color: const Color.fromARGB(255, 76, 77, 220),
           )

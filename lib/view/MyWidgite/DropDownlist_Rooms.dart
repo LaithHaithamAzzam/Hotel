@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hotel/Providers/HotelRoomsProvider.dart';
+import 'package:hotel/Providers/allHotelProvider.dart';
+import 'package:hotel/Providers/roomTypesProvider.dart';
+import 'package:hotel/controller/roomTypeCounterAPI.dart';
+import 'package:hotel/view/HotelScreen/HotelDateils.dart';
+import 'package:provider/provider.dart';
 
 
 
 
 
-const List<String> list = <String>['Hollywood Twin Room','Sweet','Super Delux','Double-double','Studio'];
+//const List<String> list = <String>['Hollywood Twin Room','Sweet','Super Delux','Double-double','Studio'];
 class DropdownMenuBottom extends StatefulWidget {
   const DropdownMenuBottom({super.key});
 
@@ -13,10 +19,15 @@ class DropdownMenuBottom extends StatefulWidget {
 }
 
 class _DropdownMenuBottomState extends State<DropdownMenuBottom> {
-  String dropdownValue = list.first;
+
 
   @override
   Widget build(BuildContext context) {
+List<String> list = Provider.of<RoomTypesProvider>(context,listen: true).data!.toList();
+TextEditingController c = TextEditingController(text: "${list.first}");
+print("$list");
+    String dropdownValue =Provider.of<RoomTypesProvider>(context,listen: true).data![0];
+    Provider.of<RoomTypesProvider>(context,listen: false).setvalue(dropdownValue.toString());
     return DropdownMenu<String>(
       textStyle: TextStyle(color: Colors.white),
       width: MediaQuery.of(context).size.width-50,
@@ -25,14 +36,12 @@ class _DropdownMenuBottomState extends State<DropdownMenuBottom> {
       inputDecorationTheme: InputDecorationTheme(
      enabledBorder:OutlineInputBorder(borderSide: BorderSide(color: Colors.white,style: BorderStyle.solid,width: 2))
     ),
-      initialSelection: list.first,
-      onSelected: (String? value) {
+    controller: c,
+    onSelected: (String? value) async{
         // This is called when the user selects an item.
-        setState(() {
-          dropdownValue = value!;
-        });
+      await  Provider.of<RoomTypesProvider>(context,listen: false).setvalue(value.toString());
       },
-      dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
+      dropdownMenuEntries:list.map<DropdownMenuEntry<String>>((String value) {
         return DropdownMenuEntry<String>(value: value, label: value);
       }).toList(),
     );

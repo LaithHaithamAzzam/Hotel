@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hotel/Icons/my_hoteli_icons.dart';
+import 'package:hotel/controller/FavoriteHotel.dart';
 import 'package:provider/provider.dart';
 
+import '../../Providers/AllFavHotelsProvider.dart';
 import '../../Providers/BottombarProvider.dart';
 
 
@@ -38,9 +40,13 @@ class BottombarState extends State<Bottombar> {
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: displayWidth * .02),
         itemBuilder: (context, index) => InkWell(
-          onTap: () {
+          onTap: () async{
             provider.setcurrentindex(index);
             HapticFeedback.lightImpact();
+            if(index == 1){
+              Provider.of<AllFavHotelsProvider>(context,listen: false).Setstate(false);
+              await FavouriteHotels(context).showFev();
+            }
           },
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,

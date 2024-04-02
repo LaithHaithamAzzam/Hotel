@@ -13,7 +13,7 @@ class allHotelAPI {
   allHotel() async {
     SharedPreferences shprefs =await SharedPreferences.getInstance();
     String? token =await shprefs.getString("Token");
-    String myurl = "${global.SERVER}/getAllHotels";
+    String myurl = "${global.SERVER}""${global.getAllHotels}";
     try {
       var response = await dio.get(myurl,
           options: Options(headers: {

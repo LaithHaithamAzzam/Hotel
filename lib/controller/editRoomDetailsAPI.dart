@@ -8,7 +8,7 @@ class editRoomDetailsAPI {
   Dio dio = Dio();
 
   editRoomDetails(String roomtype, int price, image) async {
-    String myurl = "${global.SERVER}/";
+    String myurl = "${global.SERVER}";
 
     try {
       FormData formData = FormData.fromMap({

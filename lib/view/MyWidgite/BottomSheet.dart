@@ -5,6 +5,8 @@ import 'package:hotel/view/MyWidgite/showDateSelected.dart';
 import 'package:provider/provider.dart';
 import '../../Providers/DateProvider.dart';
 import '../../Providers/HotelRoomsProvider.dart';
+import '../../Providers/roomTypesProvider.dart';
+import '../../controller/roomTypeCounterAPI.dart';
 import '../Wallet/SelectedPay.dart';
 import 'DropDownlist_Rooms.dart';
 class Bottomsheet extends StatelessWidget {
@@ -33,8 +35,9 @@ class Bottomsheet extends StatelessWidget {
                    child: DropdownMenuBottom(),
                  ),
                  GestureDetector(
-                   onTap: (){
-                     showDialog(context: context, builder: (context) => Roomcounter(counterroom:int.parse((Provider.of<HotelRoomsProvider>(context , listen: false).roomCounts).toString())));
+                   onTap: ()async{
+                    await roomTypeCounterAPI(context).roomTypeCounter(int.parse((Provider.of<HotelRoomsProvider>(context,listen: false).userId).toString()) ,  Provider.of<RoomTypesProvider>(context,listen: false).value.toString());
+                    showDialog(context: context, builder: (context) => Roomcounter(counterroom:int.parse((Provider.of<HotelRoomsProvider>(context , listen: false).roomCounts).toString())));
                    },
                    child: Container(
                      width: MediaQuery.of(context).size.width-50 ,

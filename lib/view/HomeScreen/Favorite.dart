@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hotel/controller/FavoriteHotel.dart';
+import 'package:hotel/controller/FavouriteAPIs.dart';
+import 'package:hotel/controller/api.dart';
 import 'package:provider/provider.dart';
 import '../../Icons/my_hoteli_icons.dart';
+import '../../Providers/AllFavHotelsProvider.dart';
 import '../../Providers/BottombarProvider.dart';
+import '../../controller/GetHotel.dart';
 import '../HotelScreen/Detail_Hotel_User.dart';
 import 'MainHomeScreen.dart';
 
@@ -30,13 +35,15 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       child: Scaffold(
         body: Container(
           margin: EdgeInsets.only(right: 20),
-          child: ListView.builder(itemBuilder: (context, index) {
+          child: Consumer<AllFavHotelsProvider>(
+  builder: (context, provider, child) {
+  return provider.State == true ? provider.data!.isNotEmpty ? ListView.builder(itemBuilder: (context, index) {
             return  Stack(
                 alignment: Alignment.topRight,
                 children: [
                   GestureDetector(
-                    onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => Detile_Hotel(Herotag:"$index"),));
+                    onTap: ()async{
+                      await GetHotel(context).getHotel((provider.data?[index].userId).toString(),index);
                     },
                     child: Container(
                       margin: EdgeInsets.only(left: 20,top: 20 , bottom: 10 ),
@@ -67,8 +74,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
                                   image: DecorationImage(image: NetworkImage(
-                                    "https://www.shutterstock.com/image-illustration/hotel-sign-stars-3d-illustration-260nw-197337320.jpg"
-                                    ,
+                                      "${SERVER}${Showimage}/${provider.data?[index].imageId}",
                                   ),fit: BoxFit.cover,)
                               ),
                             ),
@@ -81,21 +87,27 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                 children: [
                                   Row(
                                     children: [
-                                      Expanded(child: Text("The Burj Alreem Hotel", style: TextStyle(fontWeight: FontWeight.bold))),
+                                      Expanded(child: Text("${provider.data?[index].name}", style: TextStyle(fontWeight: FontWeight.bold))),
                                       Icon(Icons.star , color: Color(0xffFFD33C),) ,
-                                      Text("5.0", style: TextStyle(fontWeight: FontWeight.bold))
+                                      Text(provider.data?[index].rate != null ?"${provider.data?[index].rate}.0" : "0.0", style: TextStyle(fontWeight: FontWeight.bold))
                                     ],
                                   ) ,
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Text("Swidaa , Qanawat" , style: TextStyle(color: Color(0xff878787), fontWeight: FontWeight.bold),)
+                                      Text("${provider.data?[index].location?.country}"" - ${provider.data?[index].location?.city}" , style: TextStyle(color: Color(0xff878787), fontWeight: FontWeight.bold),)
                                     ],
                                   ) ,
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("SP 180.000" , style: TextStyle(color: Color(0xff4C4DDC) , fontWeight: FontWeight.bold),),
-                                      Text("/night" , style: TextStyle(color: Color(0xff878787), fontWeight: FontWeight.bold),)
+                                      Row(
+                                        children: [
+                                          Text("SP ${provider.data?[index].minPrice}" , style: TextStyle(color: Color(0xff4C4DDC) , fontWeight: FontWeight.bold),),
+                                          Text("/night" , style: TextStyle(color: Color(0xff878787), fontWeight: FontWeight.bold),)
+                                        ],
+                                      ),
+                                      provider.data![index].isOffer == true ? Icon(Icons.sell ,color: Colors.red,) : Text("")
                                     ],
                                   )
                                 ],
@@ -111,7 +123,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     child: Hero(
                       tag:"Fev${index}",
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          await FavouriteAPIs(context).DeleteFavourite(int.parse((provider.data?[index].userId).toString()),null);
+                        },
                         style: ButtonStyle(
                             iconSize: MaterialStatePropertyAll(20),
                             minimumSize: MaterialStatePropertyAll(Size(40, 40)),
@@ -130,8 +144,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 ],
             );
           },
-          itemCount: 7,
-          ),
+          itemCount: provider.data?.length,
+          ):Center(child: Text("No Favorite Hotels" , style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color: Color(0xff4C4DDC)),)):Center(child: CircularProgressIndicator());
+  },
+),
         )
       ),
     );

@@ -31,8 +31,9 @@ class Data {
   int? imageId;
   String? name;
   String? minPrice;
-  Null? rate;
+  double? rate;
   Location? location;
+  bool? isOffer;
 
   Data(
       {this.locationDetail,
@@ -42,7 +43,8 @@ class Data {
         this.name,
         this.minPrice,
         this.rate,
-        this.location});
+        this.location,
+        this.isOffer});
 
   Data.fromJson(Map<String, dynamic> json) {
     locationDetail = json['locationDetail'];
@@ -55,6 +57,7 @@ class Data {
     location = json['location'] != null
         ? new Location.fromJson(json['location'])
         : null;
+    isOffer = json['isOffer'];
   }
 
   Map<String, dynamic> toJson() {
@@ -69,6 +72,7 @@ class Data {
     if (this.location != null) {
       data['location'] = this.location!.toJson();
     }
+    data['isOffer'] = this.isOffer;
     return data;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel/Models/AllHotelsModel.dart';
+import 'package:hotel/controller/HotelRoomsTypes.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Models/HotelDetailsModel.dart';
@@ -30,7 +31,6 @@ class GetHotel{
       );
       print(Res.data);
       if(Res.data['state'] == true){
-        Navigator.of(context).pop();
         print(Res.data);
         hotelDetail hoteldet = hotelDetail.fromJson(Res.data);
         Provider.of<HotelRoomsProvider>(context , listen: false).setHotelRooms(
@@ -47,10 +47,11 @@ class GetHotel{
             hoteldet.data!.location!.city.toString(),
             hoteldet.data!.preview
         );
-
+        await roomsDetialsHotelAPI(context).roomDetialsHotel(int.parse(hotelid.toString()));
+        Navigator.of(context).pop();
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) =>
-              Detile_Hotel(Herotag: "Hotel$heroindex"),
+              Detile_Hotel(Herotag: "Hotel$heroindex", index: heroindex),
         ));
       }
     }catch (e){

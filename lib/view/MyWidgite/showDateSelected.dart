@@ -17,12 +17,15 @@ Selectdate(BuildContext context , int Sallary){
     backgroundColor: Colors.white,
     primaryColor: Color(0xff3D36A4),
     onApplyClick: (start, end) {
+      startDate= DateTime(start.year,start.month,start.day);
+      endDate= DateTime(end.year,end.month,end.day);
       print(start.subtract(Duration()));
-      print(end);
+      print(DateTime(end.year,end.month,end.day));
      String fulldate = "${end.difference(start).inDays + 1} Days";
       Provider.of<DateProvider>(context , listen: false).Changedate(fulldate);
       int sal = (end.difference(start).inDays + 1)*Sallary;
       Provider.of<DateProvider>(context , listen: false).ChangeSallary(double.parse("$sal"));
+      Provider.of<DateProvider>(context,listen: false).setDate(startDate.toString(), endDate.toString());
     },
     onCancelClick: () {
 

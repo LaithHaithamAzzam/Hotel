@@ -7,8 +7,11 @@ import 'package:hotel/view/HomeScreen/NotificationScreen.dart';
 import 'package:hotel/view/MyWidgite/Searchbottombar.dart';
 import 'package:provider/provider.dart';
 
+import '../../Providers/HotelRoomsProvider.dart';
 import '../../controller/GetHotel.dart';
+import '../../controller/FavouriteAPIs.dart';
 import '../../controller/api.dart';
+import '../../controller/HotelRoomsTypes.dart';
 import '../HotelScreen/Detail_Hotel_User.dart';
 
 class UserHomeScreen extends StatefulWidget {
@@ -159,17 +162,11 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Nearby your location",
+                      "All Popular Hotels",
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      "See all",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff4C4DDC)),
-                    ),
+                    Icon(Icons.trending_up ,color: Color(0xff4C4DDC),size: 25,)
                   ],
                 ),
               ),
@@ -196,14 +193,16 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10)),
                                     color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          blurStyle: BlurStyle.outer,
-                                          spreadRadius: 0,
-                                          offset: Offset(0, 4),
-                                          blurRadius: 6)
-                                    ]),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black54,
+                                        blurStyle: BlurStyle.solid,
+                                        spreadRadius: 0,
+                                        offset: Offset(0, 0)
+                                        ,blurRadius: 5
+                                    ),
+                                  ],
+                                ),
                                 child: Column(
                                   children: [
                                     Hero(
@@ -270,21 +269,27 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                                               ],
                                             ),
                                             Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
-                                                Text(
-                                                  "${allhotelprovider.data?[index].minPrice}",
-                                                  style: TextStyle(
-                                                      color: Color(0xff4C4DDC),
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Text(
-                                                  "/night",
-                                                  style: TextStyle(
-                                                      color: Color(0xff878787),
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )
+                                               Row(
+                                                 children: [
+                                                   Text(
+                                                     "${allhotelprovider.data?[index].minPrice}",
+                                                     style: TextStyle(
+                                                         color: Color(0xff4C4DDC),
+                                                         fontWeight:
+                                                         FontWeight.bold),
+                                                   ),
+                                                   Text(
+                                                     "/night",
+                                                     style: TextStyle(
+                                                         color: Color(0xff878787),
+                                                         fontWeight:
+                                                         FontWeight.bold),
+                                                   ),
+                                                 ],
+                                               ),
+                                                allhotelprovider.data![index].isOffer == true ? Icon(Icons.sell ,color: Colors.red,) : Text("")
                                               ],
                                             )
                                           ],
@@ -301,7 +306,13 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                               child: Hero(
                                 tag: "Fev${index}",
                                 child: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      if(allhotelprovider.data?[index].isFav==false){
+                                        await FavouriteAPIs(context).addFavourite(int.parse((allhotelprovider.data?[index].userId).toString()),index);
+                                      }else{
+                                        await FavouriteAPIs(context).DeleteFavourite(int.parse((allhotelprovider.data?[index].userId).toString()),index);
+                                      }
+                                    },
                                     style: ButtonStyle(
                                         iconSize: MaterialStatePropertyAll(22),
                                         minimumSize: MaterialStatePropertyAll(
@@ -323,6 +334,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                                         : Icon(Icons.favorite_outline)),
                               ),
                             ),
+
                           ],
                         );
                       },
@@ -339,17 +351,11 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Popular Destination",
+                      "Hotels Offers",
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      "See all",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff4C4DDC)),
-                    ),
+                    Icon(Icons.local_offer ,color: Colors.red,)
                   ],
                 ),
               ),
@@ -363,22 +369,25 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>
-                              Detile_Hotel(Herotag: "Hotel$index" "pop"),
+                              Detile_Hotel(Herotag: "Hotel$index""pop" , index: index),
                         ));
                       },
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(6)),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  blurStyle: BlurStyle.outer,
-                                  spreadRadius: 0,
-                                  offset: Offset(0, 4),
-                                  blurRadius: 6)
-                            ]),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.black54,
+                                blurStyle: BlurStyle.solid,
+                                spreadRadius: 0,
+                                offset: Offset(0, 0)
+                                ,blurRadius: 5
+                            ),
+                          ],
+                        ),
                         alignment: Alignment.centerLeft,
-                        margin: EdgeInsets.only(left: 5, top: 10, right: 10.0),
+                        margin: EdgeInsets.only(left: 10.0, top: 7, right: 10.0 ,bottom: 7),
                         width: MediaQuery.of(context).size.width,
                         height: 105,
                         child: SingleChildScrollView(
@@ -386,7 +395,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                           child: Row(
                             children: [
                               Hero(
-                                tag: "Hotel$index" "pop",
+                                tag: "Hotel$index""pop",
                                 child: Container(
                                   margin: EdgeInsets.only(
                                       left: 10, top: 10, bottom: 0),
@@ -398,7 +407,8 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                                       image: DecorationImage(
                                           fit: BoxFit.cover,
                                           image: NetworkImage(
-                                              "https://img.freepik.com/premium-photo/minsk-belarus-august-2017-columns-guestroom-hall-reception-modern-luxury-hotel_97694-6572.jpg"))),
+                                              "https://img.freepik.com/premium-photo/minsk-belarus-august-2017-columns-guestroom-hall-reception-modern-luxury-hotel_97694-6572.jpg"
+                                          ))),
                                 ),
                               ),
                               Padding(

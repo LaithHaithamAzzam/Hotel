@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hotel/Providers/roomTypeCounterProvider.dart';
+import 'package:provider/provider.dart';
+
+import '../../Providers/SelectRoomsProvider.dart';
 
 class Roomcounter extends StatefulWidget {
    Roomcounter({required this.counterroom,super.key});
@@ -23,19 +27,23 @@ class _RoomcounterState extends State<Roomcounter> {
           title: Text("Select Rooms",style: TextStyle(color: Colors.black87),textAlign: TextAlign.center),
           content: Column(
             children: [
-              Container(
+              Consumer<SelectRoomsProvider>(
+                builder: (context, provider, child) {
+                  return Container(
                   width: MediaQuery.of(context).size.width - 25,
                   height: MediaQuery.of(context).size.width - 25,
                   child: GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 5, mainAxisSpacing: 8, crossAxisSpacing: 10),
                     itemBuilder: (context, index) {
+                      int? data = Provider.of<roomTypeCounterProvider>(context,listen: true).rooms!.elementAt(index).roomNumber!;
                       return Center(child: GestureDetector(
                         onTap: () {
-                          setState(() {
-                            Isselected = !Isselected;
-                            print(Isselected);
-                          });
+                          if(provider.Rooms!.contains("$data") == true){
+                            provider.remove("$data");
+                          }else{
+                            provider.Addroom("$data");
+                          }
                         },
                         child: Container(
                           alignment: Alignment.center,
@@ -44,17 +52,21 @@ class _RoomcounterState extends State<Roomcounter> {
                           decoration: BoxDecoration(
                               color:  Isselected ? Color(0xff4C4DDC) : Colors.white,
                               borderRadius: BorderRadius.all(Radius.circular(25)),
-                              border: Border.all(color: Isselected ? Color(0xff17187a): Colors.white,width: 2)
+                              border: Border.all(color: provider.Rooms!.contains("$index")? Color(0xff17187a): Colors.white,width: 2)
                           ),
-                          child: Text("${index+1}",style: TextStyle(color:Isselected ? Colors.white :Color(0xff4C4DDC)),),
+                          child:Text("$data",style: TextStyle(color:Isselected ? Colors.white :Color(0xff4C4DDC)),),
                         ),
                       ));
                     },
-                    itemCount: widget.counterroom,
-                  ))
+                    itemCount: Provider.of<roomTypeCounterProvider>(context,listen: true).rooms!.length,
+                  ));
+  },
+)
             ],
           ),
-          actions: [TextButton(onPressed: (){}, child: Text("done"))],
+          actions: [TextButton(onPressed: (){
+
+          }, child: Text("done"))],
         ),
       ),
     );

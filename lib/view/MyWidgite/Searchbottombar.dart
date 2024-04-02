@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hotel/controller/searchAPI.dart';
+import 'package:hotel/view/HomeScreen/HotelsSerch.dart';
 import 'package:hotel/view/HotelScreen/Detail_Hotel_User.dart';
 import 'package:hotel/view/HotelScreen/HotelDateils.dart';
 import 'package:hotel/view/MyWidgite/textField.dart';
@@ -7,7 +9,8 @@ import '../Wallet/SelectedPay.dart';
 import 'DropDownlist_Rooms.dart';
 
 TextEditingController price = TextEditingController();
-TextEditingController location = TextEditingController();
+TextEditingController country = TextEditingController();
+TextEditingController city = TextEditingController();
 
 class SerchBottom extends StatelessWidget {
   SerchBottom({super.key});
@@ -60,39 +63,41 @@ class SerchBottom extends StatelessWidget {
                       suffixicon: Padding(
                         padding: const EdgeInsets.only(top: 10.0),
                         child: Text(
-                          "SP",
+                          "",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
                       prefixicon: Icon(
-                        Icons.price_change_outlined,
+                        Icons.language,
                         color: Colors.white,
                       ),
-                      controllertxt: price,
-                      hinttext: 'Set price',
-                      txtInputType: TextInputType.phone,
+                      controllertxt: country,
+                      hinttext: 'Input Country',
+                      txtInputType: TextInputType.streetAddress,
                     ),
                     Textfromfild(
-                      suffixicon: Icon(
+                      suffixicon:Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Text(
+                          "",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      prefixicon: Icon(
                         Icons.location_city,
                         color: Colors.white,
                       ),
-                      prefixicon: Icon(
-                        Icons.location_on_rounded,
-                        color: Colors.white,
-                      ),
-                      controllertxt: location,
-                      hinttext: 'Location',
+                      controllertxt: city,
+                      hinttext: 'City',
                       txtInputType: TextInputType.streetAddress,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                       child: TextButton(
                         onPressed: () {
-                          Navigator.of(context).pop();
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Detile_Hotel(),));
-                        },
-                        child: Text("Serch Hotel"),
+                          SearchAPI(context).searchcustom(country.text, city.text,price.text.isEmpty ? 0 : int.parse(price.text));
+                          },
+                        child: Text("Search Hotel"),
                         style: ButtonStyle(
                             foregroundColor:
                                 MaterialStatePropertyAll(Colors.white),
