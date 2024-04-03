@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:get/get.dart';
 import 'package:hotel/Icons/my_hoteli_icons.dart';
 import 'package:hotel/Providers/NotificationProvider.dart';
 import 'package:hotel/Providers/allHotelProvider.dart';
@@ -162,7 +163,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "All Popular Hotels",
+                      "All Popular Hotels".tr,
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
@@ -281,7 +282,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                                                          FontWeight.bold),
                                                    ),
                                                    Text(
-                                                     "/night",
+                                                     "/night".tr,
                                                      style: TextStyle(
                                                          color: Color(0xff878787),
                                                          fontWeight:
@@ -351,7 +352,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Hotels Offers",
+                      "Hotels Offers".tr,
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
@@ -431,7 +432,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                                               fontWeight: FontWeight.bold),
                                         ),
                                         Text(
-                                          "/night",
+                                          "/night".tr,
                                           style: TextStyle(
                                               color: Color(0xff878787),
                                               fontWeight: FontWeight.bold),

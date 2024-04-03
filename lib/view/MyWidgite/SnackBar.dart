@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hotel/Icons/my_hoteli_icons.dart';
 import 'package:hotel/Providers/MyWallet_Provider.dart';
 
@@ -38,7 +39,7 @@ showSnackBar(BuildContext context , String Title , Color color , bool done){
                 onTap: (){
                   Provider.of<WalletProvider>(context,listen: false).ChargeWallet(180000);
                 },
-                child: Text("Charge Now" , style: TextStyle(color: Colors.green),)
+                child: Text("Charge Now".tr , style: TextStyle(color: Colors.green),)
             ):
             Text("")
           ],),

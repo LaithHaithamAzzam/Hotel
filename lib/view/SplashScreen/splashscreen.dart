@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:hotel/controller/GetHotel.dart';
+import 'package:hotel/controller/GetHotelHomeScreen.dart';
 import 'package:hotel/controller/HotelRoomsAPI.dart';
 import 'package:hotel/view/AdminScreen/Admin.dart';
 import 'package:hotel/view/HomeScreen/MainHomeScreen.dart';
 import 'package:hotel/view/HotelScreen/HotelHomeScreen.dart';
+import 'package:hotel/view/HotelScreen/MainHotelScreen.dart';
 import 'package:hotel/view/SplashScreen/LoginAndRegister.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,8 +41,9 @@ class _SplashscreenState extends State<Splashscreen> {
        await allHotelAPI(context).allHotel();
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen(),));
       }else if(rool == "hotel"){
+        await GetHotelHomeScreen(context).getHotelHomeScreen();
         await hotelRoomsAPI(context).hotelRooms(DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day).toString(), DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day+1).toString());
-           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HotelHomeScreen(),));
+           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainHotelHomeScreen(),));
       }else if(rool == "admin"){
         String? Tool = await prefs.getString("Token");
         print(Tool);

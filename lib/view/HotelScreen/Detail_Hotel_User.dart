@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:get/get.dart';
 import 'package:hotel/Icons/my_hoteli_icons.dart';
 import 'package:hotel/Providers/allHotelProvider.dart';
 import 'package:hotel/controller/api.dart';
@@ -33,7 +34,7 @@ class Detile_Hotel extends StatelessWidget {
               );
 
             },
-            child: Text("Booking Now"),
+            child: Text("Booking Now".tr),
             style: ButtonStyle(
                 foregroundColor: MaterialStatePropertyAll(Colors.white),
                 backgroundColor: MaterialStatePropertyAll(Color(0xff4C4DDC)),
@@ -109,7 +110,7 @@ class Detile_Hotel extends StatelessWidget {
                     },
                   ),
                   Text(
-                    "Detile",
+                    "Detile".tr,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   IconButton(
@@ -244,13 +245,13 @@ class Detile_Hotel extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  "SP ${Provider.of<HotelRoomsProvider>(context , listen: false).minPrice}",
+                                  "SP".tr +"${Provider.of<HotelRoomsProvider>(context , listen: false).minPrice}",
                                   style: TextStyle(
                                       color: Color(0xff4C4DDC),
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  "/night",
+                                  "/night".tr,
                                   style: TextStyle(
                                       color: Color(0xff878787),
                                       fontWeight: FontWeight.bold),
@@ -285,7 +286,7 @@ class Detile_Hotel extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                   child: Row(
                     children: [
-                      Text("Description",
+                      Text("Description".tr,
                           style: TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
@@ -295,9 +296,9 @@ class Detile_Hotel extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 4.0 , right: 4.0),
                     child: ExpandableText(
-                      "${Provider.of<HotelRoomsProvider>(context , listen: false).detail}"
+                      "- ${Provider.of<HotelRoomsProvider>(context , listen: false).detail}"
                       "\n - Location Description : ${Provider.of<HotelRoomsProvider>(context , listen: false).locationDetail}"
-                          "\n - Rooms type: ${Provider.of<RoomTypesProvider>(context,listen: false).data}",
+                          "\n - Rooms type: ${Provider.of<RoomTypesProvider>(context,listen: false).data.toString().replaceAll("[", "").replaceAll("]", "")}",
                     ),
                   ),
                 ),
@@ -305,7 +306,7 @@ class Detile_Hotel extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                   child: Row(
                     children: [
-                      Text("Preview",
+                      Text("Preview".tr,
                           style: TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),

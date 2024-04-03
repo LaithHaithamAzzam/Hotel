@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hotel/Providers/DarwerProvider.dart';
+import 'package:hotel/Providers/HotelHomeScreen_Provider.dart';
+import 'package:hotel/Providers/HotelRoomsProvider.dart';
+import 'package:hotel/Providers/customerInformationProvider.dart';
+import 'package:hotel/Providers/roomTypesProvider.dart';
+import 'package:hotel/controller/api.dart';
 import 'package:hotel/view/MyWidgite/ShowImage.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +15,6 @@ class HotelHomeScreen extends StatelessWidget {
    HotelHomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    int index = 5;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -17,7 +22,7 @@ class HotelHomeScreen extends StatelessWidget {
         shadowColor: Colors.black,
         centerTitle: true,
         title:Text(
-          "The Hotel Name",
+          Provider.of<customerInformationProvider>(context,listen: true).name,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
         actions: [
@@ -50,7 +55,9 @@ class HotelHomeScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: (){
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => ShowImage(HERO : "hotel" ,
-                        URL: "https://media.istockphoto.com/id/104731717/photo/luxury-resort.jpg?s=1024x1024&w=is&k=20&c=lNQVwTuYzo9wQZfZzHioQMCJRTHWVzhX1UXmcqgnF5k="                    ),));
+                        URL:
+                           "$SERVER""$Showimage""/${Provider.of<customerInformationProvider>(context , listen:  false).imageid}"
+                    ),));
                   },
                   child: Container(
                     margin: EdgeInsets.only(bottom: 10),
@@ -67,7 +74,8 @@ class HotelHomeScreen extends StatelessWidget {
                                 BorderRadius.all(Radius.circular(6)),
                                 image: DecorationImage(
                                     image: NetworkImage(
-                                      "https://media.istockphoto.com/id/104731717/photo/luxury-resort.jpg?s=1024x1024&w=is&k=20&c=lNQVwTuYzo9wQZfZzHioQMCJRTHWVzhX1UXmcqgnF5k=",
+                                      "$SERVER""$Showimage""/${Provider.of<customerInformationProvider>(context , listen:  false).imageid}"
+                                      ,
                                     ),
                                     fit: BoxFit.cover)),
                           ),
@@ -87,39 +95,46 @@ class HotelHomeScreen extends StatelessWidget {
                         color: Color(0xffF5F5FF),
                         borderRadius:
                         BorderRadius.all(Radius.circular(8))),
-                    child: Container(
+                    child: Consumer<HotelRoomsProvider>(
+  builder: (context, provider, child) {
+    int rate = provider.rate != null ? int.parse(provider.rate.toString()): 0;
+  return Container(
                         margin:
                         EdgeInsets.only(bottom: 5, right: 5, left: 5),
                         child:  Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.star,
-                                color: Color(0xffFFD33C)),
-                            Icon(Icons.star,
-                                color: index >= 1
+                                color: rate > 0
                                     ? Color(0xffFFD33C)
                                     : Color(0xff878787)),
                             Icon(Icons.star,
-                                color: index >= 2
+                                color: rate >1
                                     ? Color(0xffFFD33C)
                                     : Color(0xff878787)),
                             Icon(Icons.star,
-                                color: index >= 3
+                                color: rate > 2
                                     ? Color(0xffFFD33C)
                                     : Color(0xff878787)),
                             Icon(Icons.star,
-                                color: index >= 4
+                                color: rate > 3
+                                    ? Color(0xffFFD33C)
+                                    : Color(0xff878787)),
+                            Icon(Icons.star,
+                                color: rate > 4
                                     ? Color(0xffFFD33C)
                                     : Color(0xff878787)),
                             Padding(
                               padding: const EdgeInsets.only(left: 8.0),
-                              child: Text("5.0",
+                              child: Text( provider.rate != null ? "${Provider.of<HotelRoomsProvider>(context , listen: false).rate}.0" : "Not Rated",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold)),
                             )
                           ],
                         )
-                    ),
+                    );
+  },
+),
                   ),
                 ),
                 Container(
@@ -131,13 +146,13 @@ class HotelHomeScreen extends StatelessWidget {
                       children: [
                         Icon(Icons.monetization_on ,  color: Color(0xff4C4DDC),size: 20,),
                         Text(
-                          "SP 180000",
+                          "SP".tr+"${Provider.of<HotelRoomsProvider>(context , listen: false).minPrice}",
                           style: TextStyle(
                               color: Color(0xff4C4DDC),
                               fontWeight: FontWeight.bold,fontSize: 16),
                         ),
                         Text(
-                          "/night",
+                          "/night".tr,
                           style: TextStyle(
                               color: Color(0xff878787),
                               fontWeight: FontWeight.bold,fontSize: 16),
@@ -151,16 +166,20 @@ class HotelHomeScreen extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.location_on_rounded,
-                        color: Color(0xff4C4DDC),
-                        size: 23,
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.location_on_rounded,
+                            color: Color(0xff4C4DDC),
+                            size: 23,
+                          ),
+                          Text(
+                            " ${Provider.of<HotelRoomsProvider>(context , listen: false).country}"" -  ${Provider.of<HotelRoomsProvider>(context , listen: false).city}",
+                            style:
+                            TextStyle(color: Color(0xff878787), fontSize: 16),
+                          )
+                        ],
                       ),
-                      Text(
-                        "Syria"" - Swidaa",
-                        style:
-                        TextStyle(color: Color(0xff878787), fontSize: 16),
-                      )
                     ],
                   ),
                 ),
@@ -168,7 +187,7 @@ class HotelHomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                   child: Row(
                     children: [
-                      Text("Description",
+                      Text("Description".tr,
                           style: TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
@@ -178,9 +197,9 @@ class HotelHomeScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 4.0 , right: 4.0),
                     child: Text(
-                      "DETAIL"
-                          "\n - Location Description : "
-                          "\n - Rooms type: ",
+                      "- ${Provider.of<HotelRoomsProvider>(context , listen: false).detail}"
+                          "\n"+ "- Location Description".tr+ ":"+ "${Provider.of<HotelRoomsProvider>(context , listen: false).locationDetail}"
+                          "\n"+  "Rooms type".tr+":" +"${Provider.of<RoomTypesProvider>(context).types.toString().replaceAll("[", "").replaceAll("]", "")}",
                     ),
                   ),
                 ),
@@ -189,7 +208,7 @@ class HotelHomeScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Preview",
+                      Text("Preview".tr,
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       Icon(Icons.view_carousel_rounded,color:Color(0xff4C4DDC),size: 25,)
                     ],
@@ -197,16 +216,18 @@ class HotelHomeScreen extends StatelessWidget {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  height:MediaQuery.of(context).size.width/2,
+                  height:MediaQuery.of(context).size.width/1.6,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(6)),),
-                  child: PageView.builder(
+                  child: Provider.of<HotelHomeScreenProvider>(context , listen:  false).previewimage!=null ?
+                  PageView.builder(
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: (){
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => ShowImage(
                             HERO : "prev",
-                            URL: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/491829280.jpg?k=8e5ebf81dcc4ae3913dd285be94ba05866559b27c503912b8e1f2c7239fccc2c&o=&hp=1",
+                            URL:
+                            "$SERVER""$Showimage""/${Provider.of<HotelHomeScreenProvider>(context , listen:  false).previewimage?[index]}"
                           ),));
                         },
                         child: Hero(
@@ -218,15 +239,25 @@ class HotelHomeScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.all(Radius.circular(6)),
                                 image: DecorationImage(
                                     image: NetworkImage(
-                                      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/491829280.jpg?k=8e5ebf81dcc4ae3913dd285be94ba05866559b27c503912b8e1f2c7239fccc2c&o=&hp=1",
+                                        "$SERVER""$Showimage""/${Provider.of<HotelHomeScreenProvider>(context , listen:  false).previewimage?[index]}"
                                     ),
                                     fit: BoxFit.cover)),
                           ),
                         ),
                       );
                     },
-                    itemCount: 8,
-                  ),
+                    itemCount: Provider.of<HotelHomeScreenProvider>(context,listen: false).previewimage?.length,
+                  ):Container(
+                    alignment: Alignment.center,
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(6)),
+                    color: Color(0xff4C4DDC)
+                    ),
+                    child: Text("No Image Of Preview".tr,style: TextStyle(color: Colors.white),),
+                  )
+                  ,
                 )
               ],
             ),

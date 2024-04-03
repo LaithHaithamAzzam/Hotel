@@ -14,33 +14,41 @@ class MainHotelHomeScreen extends StatefulWidget {
 class _MainHotelHomeScreenState extends State<MainHotelHomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
+    return GestureDetector(
+      onTap: (){
         if( Provider.of<DraweProvider>(context , listen: false).isopen ==true ){
           Provider.of<DraweProvider>(context , listen: false).opendrawer(false);
         }
-        return Future(() => false);
       },
-      child: Consumer<DraweProvider>(
-        builder: (context, provider, child) {
-          return Stack(
-            children: [
-              DraweHome(),
-              AnimatedContainer(
-                     transform: Matrix4.identity()
-                    ..translate(provider.isopen ? -90.0 : 0.0, provider.isopen ? 90.0 : 0.0, 0.0)
-                       ..rotateX(provider.isopen ? 0.5 : 0.0)
-                    ..scale(provider.isopen ? 0.8 : 1.0),
-                  duration: Duration(milliseconds: 200),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(50))
-                    ),
-                    child: HotelHomeScreen(),
-                  )),
-            ],
-          );
+      child: WillPopScope(
+        onWillPop: () {
+          if( Provider.of<DraweProvider>(context , listen: false).isopen ==true ){
+            Provider.of<DraweProvider>(context , listen: false).opendrawer(false);
+          }
+          return Future(() => false);
         },
+        child: Consumer<DraweProvider>(
+          builder: (context, provider, child) {
+            return Stack(
+              children: [
+                DraweHome(),
+                AnimatedContainer(
+                  curve: Easing.standard,
+                       transform: Matrix4.identity()
+                      ..translate(provider.isopen ? -90.0 : 0.0, provider.isopen ? 130.0 : 0.0, 0.0)
+                         ..rotateX(provider.isopen ? 0.5 : 0.0)
+                      ..scale(provider.isopen ? 0.8 : 1.0),
+                    duration: Duration(milliseconds: 300),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(50))
+                      ),
+                      child: HotelHomeScreen(),
+                    )),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

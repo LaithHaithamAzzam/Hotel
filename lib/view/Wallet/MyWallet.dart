@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:hotel/Providers/BottombarProvider.dart';
 import 'package:hotel/view/HomeScreen/MainHomeScreen.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,7 @@ class Mywallet extends StatelessWidget {
           shadowColor: Colors.black,
           surfaceTintColor: Colors.white,
           centerTitle: true,
-          title: Text("My Wallet" , style: TextStyle(fontSize: 16),),
+          title: Text("My Wallet".tr , style: TextStyle(fontSize: 16),),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -74,7 +75,7 @@ class Mywallet extends StatelessWidget {
                    ],
                  ),
                ) ,
-            Text("You Can Charge Your Wallet" , style: TextStyle(color: Color(0xff4C4DDC) , fontSize: MediaQuery.of(context).size.width * 0.037),),
+            Text("You Can Charge Your Wallet".tr , style: TextStyle(color: Color(0xff4C4DDC) , fontSize: MediaQuery.of(context).size.width * 0.037),),
         Padding(
                   padding: const EdgeInsets.only(top: 40.0),
                   child: Container(
@@ -100,8 +101,8 @@ class Mywallet extends StatelessWidget {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            Text("Charging My Wallet"),
-                            Text("Mony"),
+                            Text("Charging My Wallet".tr),
+                            Text("Mony".tr),
                             TextFormField(
                                 maxLength: 10,
                               controller: monyContr,
@@ -118,7 +119,7 @@ class Mywallet extends StatelessWidget {
                                   Provider.of<WalletProvider>(context , listen: false).ChargeWallet(double.parse(monyContr.text));
                                 }
                               },
-                              child: Text("Charging Now"),
+                              child: Text("Charging Now".tr),
                               style: ButtonStyle(
                                 shadowColor: MaterialStatePropertyAll(Colors.black),
                                   foregroundColor: MaterialStatePropertyAll(Colors.white),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../Providers/HotelHomeScreen_Provider.dart';
@@ -23,7 +24,7 @@ class HotelBottomSheetRooms extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 8.0 , bottom: 8.0 ),
-              child: Text("All My Rooms" , style: TextStyle(fontWeight: FontWeight.bold , color: Colors.white),),
+              child: Text("All My Rooms".tr , style: TextStyle(fontWeight: FontWeight.bold , color: Colors.white),),
             ),
             Expanded(
               child: Padding(

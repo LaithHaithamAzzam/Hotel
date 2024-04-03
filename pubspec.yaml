@@ -44,6 +44,7 @@ dependencies:
   shared_preferences: ^2.2.2
   custom_date_range_picker: ^1.0.10
   image_picker: ^1.0.7
+  image_cropper: ^5.0.1
 
 
 dev_dependencies:

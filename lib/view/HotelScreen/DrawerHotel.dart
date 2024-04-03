@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotel/Providers/DarwerProvider.dart';
+import 'package:hotel/controller/AddPrivImage_Void.dart';
 import 'package:hotel/locale/local_controller.dart';
 import 'package:hotel/main.dart';
 import 'package:hotel/view/MyWidgite/HotelBottomSheetRooms.dart';
 import 'package:hotel/view/MyWidgite/TextButtonForHotel.dart';
 import 'package:provider/provider.dart';
+
+import '../Offers/addOffers.dart';
+import '../Offers/hotelOffers.dart';
 
 class DraweHome extends StatefulWidget {
   const DraweHome({super.key});
@@ -39,7 +43,6 @@ class _DraweHomeState extends State<DraweHome> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text("Settings".tr, style: TextStyle(color: Colors.white ,fontSize: 16),),
                       Padding(
                         padding: const EdgeInsets.only(top: 40.0),
                         child: TextButtonforHotel(color: Color(0xff3D36A4),text: "My Rooms".tr,width: MediaQuery.of(context).size.width/3,hight:60,onpressed: (){
@@ -50,11 +53,22 @@ class _DraweHomeState extends State<DraweHome> {
                       }, )),
                       Padding(
                         padding: const EdgeInsets.only(top: 20.0),
+                        child: TextButtonforHotel(color: Color(0xff3D36A4),text: "My Offers".tr,width: MediaQuery.of(context).size.width/3,hight:60,onpressed: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => HotelOffers(),));
+                      }, )),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
                         child: TextButtonforHotel(color: Color(0xff3D36A4),text: "Edite Detail".tr,width: MediaQuery.of(context).size.width/3,hight:60,onpressed: (){}, ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 20.0),
                         child: TextButtonforHotel(color: Color(0xff3D36A4),text: "Edite Location Detail".tr,width: MediaQuery.of(context).size.width/3,hight:60,onpressed: (){}, ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: TextButtonforHotel(color: Color(0xff3D36A4),text: "Add Preview Image".tr,width: MediaQuery.of(context).size.width/3,hight:60,onpressed: (){
+                          Addimage(context);
+                        }, ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 20.0,bottom: 20.0),
@@ -75,7 +89,7 @@ class _DraweHomeState extends State<DraweHome> {
                           }
                         }, ),
                       ),
-                      TextButtonforHotel(color: Colors.redAccent,text: "Sign Out".tr,width: MediaQuery.of(context).size.width/3,hight:60,onpressed: (){}, ),
+                      TextButtonforHotel(color: Colors.redAccent,text: "Logout".tr,width: MediaQuery.of(context).size.width/3,hight:60,onpressed: (){}, ),
                     ],
                   ),
                 ],

@@ -17,7 +17,6 @@ class roomsDetialsHotelAPI {
           data: {"hotelId": hotelid},
           options: Options(headers: {
             'accept': 'application/json',
-
           }));
       print(response);
       RoomTypesModel model = RoomTypesModel.fromJson(response.data);

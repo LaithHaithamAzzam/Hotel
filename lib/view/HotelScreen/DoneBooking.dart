@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hotel/view/Wallet/MyWallet.dart';
 
 import '../HomeScreen/MainHomeScreen.dart';
@@ -31,7 +32,7 @@ class _DoneBookingState extends State<DoneBooking> {
                       MaterialPageRoute(builder: (context) => HomeScreen(),), (
                         route) => false,);
                   },
-                  child: Text("OK"),
+                  child: Text("OK".tr),
                   style: ButtonStyle(
                       foregroundColor: MaterialStatePropertyAll(Colors.white),
                       backgroundColor: MaterialStatePropertyAll(
@@ -54,7 +55,7 @@ class _DoneBookingState extends State<DoneBooking> {
                       MaterialPageRoute(builder: (context) => Mywallet(),), (
                         route) => false,);
                   },
-                  child: Text("Show My Wallet"),
+                  child: Text("Show My Wallet".tr),
                   style: ButtonStyle(
                       foregroundColor: MaterialStatePropertyAll(Colors.white),
                       backgroundColor: MaterialStatePropertyAll(
@@ -85,7 +86,7 @@ class _DoneBookingState extends State<DoneBooking> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Text("Order Confirmed", style: TextStyle(
+                      child: Text("Order Confirmed".tr, style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Color(0xff5852B1)),),
                     ),
@@ -102,7 +103,7 @@ class _DoneBookingState extends State<DoneBooking> {
                       alignment: Alignment.topCenter,
                       child: SingleChildScrollView(
                         child: Text(
-                          "Your Room IS \n\n 24",
+                          "Your Room IS".tr+ "\n\n 24",
                           textAlign: TextAlign.center,
                           style: TextStyle(fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -112,7 +113,7 @@ class _DoneBookingState extends State<DoneBooking> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0, bottom: 30.0),
                       child: Text(textAlign: TextAlign.center,
-                        "thank you for your order. \n check your Notification to show Your Room",
+                        "thank you for your order.".tr +"\n" +"check your Notification to show Your Room".tr,
                         style: TextStyle(fontWeight: FontWeight.bold,
                             color: Color(0xff5852B1)),),
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hotel/controller/Addlocations.dart';
 
 class AddLocation extends StatelessWidget {
@@ -9,7 +10,7 @@ class AddLocation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:Text("Add Location Screen"),
+        title:Text("Add Location Screen".tr),
         centerTitle: true,
       ),
       body: Center(
@@ -66,7 +67,7 @@ class AddLocation extends StatelessWidget {
                   onPressed: ()async{
                   await AddLocationsAPI(context).addLocation(Country.text,City.text);
                   City.clear();
-                  }, child: Text("Add Location",style: TextStyle(color:Colors.white,)))
+                  }, child: Text("Add Location".tr,style: TextStyle(color:Colors.white,)))
             ],
           ),
         ),

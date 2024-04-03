@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hotel/controller/FavoriteHotel.dart';
 import 'package:hotel/controller/FavouriteAPIs.dart';
 import 'package:hotel/controller/api.dart';
@@ -103,8 +104,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                     children: [
                                       Row(
                                         children: [
-                                          Text("SP ${provider.data?[index].minPrice}" , style: TextStyle(color: Color(0xff4C4DDC) , fontWeight: FontWeight.bold),),
-                                          Text("/night" , style: TextStyle(color: Color(0xff878787), fontWeight: FontWeight.bold),)
+                                          Text("SP".tr+ "${provider.data?[index].minPrice}" , style: TextStyle(color: Color(0xff4C4DDC) , fontWeight: FontWeight.bold),),
+                                          Text("/night".tr , style: TextStyle(color: Color(0xff878787), fontWeight: FontWeight.bold),)
                                         ],
                                       ),
                                       provider.data![index].isOffer == true ? Icon(Icons.sell ,color: Colors.red,) : Text("")
@@ -145,7 +146,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             );
           },
           itemCount: provider.data?.length,
-          ):Center(child: Text("No Favorite Hotels" , style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color: Color(0xff4C4DDC)),)):Center(child: CircularProgressIndicator());
+          ):Center(child: Text("No Favorite Hotels".tr , style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color: Color(0xff4C4DDC)),)):Center(child: CircularProgressIndicator());
   },
 ),
         )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddAdmin extends StatelessWidget {
   AddAdmin({super.key});
@@ -8,7 +9,7 @@ class AddAdmin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:Text("Add Location Screen"),
+        title:Text("Add Location Screen".tr),
         centerTitle: true,
       ),
       body: Center(
@@ -64,7 +65,7 @@ class AddAdmin extends StatelessWidget {
                   ),
                   onPressed: (){
                  //   AddAdminsAPI(context).AddAdmin(country.text,city.text);
-                  }, child: Text("Add Admin",style: TextStyle(color:Colors.white,)))
+                  }, child: Text("Add Admin".tr,style: TextStyle(color:Colors.white,)))
             ],
           ),
         ),

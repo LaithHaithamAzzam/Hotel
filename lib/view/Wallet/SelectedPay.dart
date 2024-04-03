@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hotel/Providers/MyWallet_Provider.dart';
 import 'package:hotel/view/HotelScreen/DoneBooking.dart';
 import 'package:provider/provider.dart';
@@ -39,10 +40,10 @@ class SelectPay extends StatelessWidget {
                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => DoneBooking(),),(route) => false,);
                   }
                 else{
-                  showSnackBar(context , "You dont Have A More Mony", Color(0xff4C4DDC) , true);
+                  showSnackBar(context , "You dont Have A More Mony".tr, Color(0xff4C4DDC) , true);
                 }
                 },
-              child: Text("Booking Now"),
+              child: Text("Booking Now".tr),
               style: ButtonStyle(
                   foregroundColor: MaterialStatePropertyAll(Colors.white),
                   backgroundColor:MaterialStatePropertyAll(Color(0xff4C4DDC)),
@@ -54,7 +55,7 @@ class SelectPay extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        title: Text("Booking Hotel"),
+        title: Text("Booking Hotel".tr),
         centerTitle: true,
       ),
       body: Center(
@@ -68,7 +69,7 @@ class SelectPay extends StatelessWidget {
                   child: RadioListTile(
                   secondary: Icon(Icons.wallet,color: Color(0xff5852B1),size: 25),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(6)),side: BorderSide(color: Color(0xff4C4DDC))),
-                  title: Center(child: Text("Hotel Wallet")),
+                  title: Center(child: Text("Hotel Wallet".tr)),
                   value: 0,
                   activeColor: Color(0xff5852B1),
                   groupValue: selectiongrp,

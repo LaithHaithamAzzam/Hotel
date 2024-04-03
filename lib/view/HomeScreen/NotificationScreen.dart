@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Notifications extends StatelessWidget {
   const Notifications({super.key});
@@ -6,7 +7,7 @@ class Notifications extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Notifications"),
+        title: Text("Notifications".tr),
         centerTitle: true,
         actions: [
           Padding(
@@ -25,7 +26,7 @@ class Notifications extends StatelessWidget {
               leading: Icon(Icons.villa_outlined),
               trailing: Icon(Icons.navigate_next),
               title: Text("The Burj Alreem Hotel"),
-              subtitle: Text("Your Room IS [ ${index+24} ]"),
+              subtitle: Text("Your Room IS".tr+ "[ ${index+24} ]"),
             ),
           );
         },

@@ -55,7 +55,7 @@ class _MyProfState extends State<MyProf> {
                  children: [
                    Padding(
                      padding: const EdgeInsets.only(top: 20.0),
-                     child: Text("My Profile" , style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold , fontSize: 14),),
+                     child: Text("My Profile".tr , style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold , fontSize: 14),),
                    )
                    ,
                    Container(
@@ -93,7 +93,7 @@ class _MyProfState extends State<MyProf> {
                      ),
                    ),
 
-                   Text("Settings" , style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold , fontSize: 14),)
+                   Text("Settings".tr , style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold , fontSize: 14),)
                    ,Padding(
                      padding: const EdgeInsets.only(top: 10.0 , bottom: 10.0),
                      child: TextButton(
@@ -121,26 +121,14 @@ class _MyProfState extends State<MyProf> {
                        ),
                      ),
                    ),
-                   Padding(
-                     padding: const EdgeInsets.only(bottom: 10.0),
-                     child: TextButton(
-                       onPressed: (){},
-                       child: Text("Theme"),
-                       style: ButtonStyle(
-                           foregroundColor: MaterialStatePropertyAll(Colors.white),
-                           backgroundColor:MaterialStatePropertyAll(Color(0xff4C4DDC)),
-                           minimumSize: MaterialStatePropertyAll(Size(MediaQuery.of(context).size.width * .9 , 60)),
-                           shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(6))))
-                       ),
-                     ),
-                   ),
+
                    TextButton(
                      onPressed: ()async{
                        SharedPreferences prefs = await SharedPreferences.getInstance();
                        prefs.clear();
                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => loginAndRegisterScreen(),));
                      },
-                     child: Text("Log out"),
+                     child: Text("Logout".tr),
                      style: ButtonStyle(
                        overlayColor: MaterialStatePropertyAll(Color(0xffe57b7b)),
                          foregroundColor: MaterialStatePropertyAll(Colors.white),

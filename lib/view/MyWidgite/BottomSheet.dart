@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hotel/view/MyWidgite/RoomCounter.dart';
 import 'package:hotel/view/MyWidgite/showDateSelected.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ class Bottomsheet extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 8.0 , bottom: 10.0),
-            child: Text("Room Type" , style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold , fontSize: 16),),
+            child: Text("Room Type".tr , style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold , fontSize: 16),),
           ) ,
          Expanded(
            child: SingleChildScrollView(
@@ -47,7 +48,7 @@ class Bottomsheet extends StatelessWidget {
                        borderRadius: BorderRadius.all(Radius.circular(6)),
                        border: Border.all(color: Colors.white,width: 2)
                      ),
-                     child:Center(child: Text("Select Rooms" , style: TextStyle(fontSize: 16,color: Colors.white),))
+                     child:Center(child: Text("Select Rooms".tr , style: TextStyle(fontSize: 16,color: Colors.white),))
                    ),
                  ),
                  Padding(
@@ -68,7 +69,7 @@ class Bottomsheet extends StatelessWidget {
 
                  Padding(
                    padding: const EdgeInsets.only(top: 25.0 , bottom: 25.0),
-                   child: Text("${Provider.of<DateProvider>(context , listen: false).sallary} /Night  SP",style:TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),),
+                   child: Text("${Provider.of<DateProvider>(context , listen: false).sallary}" +"/Night".tr + "SP".tr,style:TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),),
                  ),
                  Padding(
                    padding: const EdgeInsets.only(left: 20.0 , right: 20.0),
@@ -78,7 +79,7 @@ class Bottomsheet extends StatelessWidget {
                         onPressed: (){
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => SelectPay(),));
                         },
-                       child: Text("Booking Now"),
+                       child: Text("Booking Now".tr),
                        style: ButtonStyle(
                            foregroundColor: MaterialStatePropertyAll(Colors.white),
                            backgroundColor:MaterialStatePropertyAll(Color(0xff3D36A4)),

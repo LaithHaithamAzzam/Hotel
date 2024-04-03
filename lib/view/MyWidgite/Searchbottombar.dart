@@ -37,7 +37,7 @@ class SerchBottom extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Text(
-                            "Coustom Serch",
+                            "Coustom Serch".tr,
                             style: TextStyle(color: Colors.white, fontSize: 16),
                           ),
                         ),
@@ -47,7 +47,7 @@ class SerchBottom extends StatelessWidget {
                       suffixicon: Padding(
                         padding: const EdgeInsets.only(top: 10.0),
                         child: Text(
-                          "SP",
+                          "SP".tr,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -97,7 +97,7 @@ class SerchBottom extends StatelessWidget {
                         onPressed: () {
                           SearchAPI(context).searchcustom(country.text, city.text,price.text.isEmpty ? 0 : int.parse(price.text));
                           },
-                        child: Text("Search Hotel"),
+                        child: Text("Search Hotel".tr),
                         style: ButtonStyle(
                             foregroundColor:
                                 MaterialStatePropertyAll(Colors.white),

@@ -1,4 +1,4 @@
-String server = "http://192.168.1.103";
+String server = "http://192.168.1.109";
 String port = "8000";
 String SERVER = "$server:$port/api";
 String Register = "/register";
@@ -15,9 +15,9 @@ String addFav = "/addFav";
 String deleteFav = "/deleteFav";
 String favHotel = "/favHotel";
 String hotelRooms = "/hotelRooms";
-
-
-
+String getHoteldetail = "/getHotelDetail";
+String addImage = "/addImage";
+String ShowOffers ="";
 
 
 

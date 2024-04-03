@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hotel/view/AdminScreen/AddAdmin.dart';
 import 'package:hotel/view/AdminScreen/AddLocation.dart';
 import 'package:hotel/view/HotelScreen/HotelRegister.dart';
@@ -19,7 +20,7 @@ class _AdminScreenState extends State<AdminScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Admin Screen"),
+        title: Text("Admin Screen".tr),
         centerTitle: true,
       ),
       body: Center(
@@ -33,7 +34,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       60))),
                   onPressed: (){
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddLocation(),));
-                  }, child: Text("Add Location" , style: TextStyle(color: Colors.white),)),
+                  }, child: Text("Add Location".tr , style: TextStyle(color: Colors.white),)),
             ),
 
 
@@ -42,7 +43,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     60))),
                 onPressed: (){
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => HotelRegister(),));
-                }, child: Text("Add Hotel" , style: TextStyle(color: Colors.white),)),
+                }, child: Text("Add Hotel".tr , style: TextStyle(color: Colors.white),)),
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
               child: TextButton(
@@ -50,7 +51,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       60))),
                   onPressed: (){
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddAdmin(),));
-                  }, child: Text("Add Admin" , style: TextStyle(color: Colors.white),)),
+                  }, child: Text("Add Admin".tr , style: TextStyle(color: Colors.white),)),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
@@ -59,7 +60,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       60))),
                   onPressed: (){
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddLocation(),));
-                  }, child: Text("Charge Wallet" , style: TextStyle(color: Colors.white),)),
+                  }, child: Text("Charge Wallet".tr , style: TextStyle(color: Colors.white),)),
             ) ,
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
@@ -70,7 +71,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => loginAndRegisterScreen(),));
                     SharedPreferences prefs = await SharedPreferences.getInstance();
                     await prefs.clear();
-                  }, child: Text("Logout" , style: TextStyle(color: Colors.white),)),
+                  }, child: Text("Logout".tr , style: TextStyle(color: Colors.white),)),
             )
           ],
         ),

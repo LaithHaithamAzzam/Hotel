@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hotel/Providers/roomTypeCounterProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +25,7 @@ class _RoomcounterState extends State<Roomcounter> {
           actionsAlignment: MainAxisAlignment.center,
           contentPadding: EdgeInsets.zero,
           insetPadding: EdgeInsets.zero,
-          title: Text("Select Rooms",style: TextStyle(color: Colors.black87),textAlign: TextAlign.center),
+          title: Text("Select Rooms".tr,style: TextStyle(color: Colors.black87),textAlign: TextAlign.center),
           content: Column(
             children: [
               Consumer<SelectRoomsProvider>(
@@ -66,7 +67,7 @@ class _RoomcounterState extends State<Roomcounter> {
           ),
           actions: [TextButton(onPressed: (){
 
-          }, child: Text("done"))],
+          }, child: Text("done".tr))],
         ),
       ),
     );

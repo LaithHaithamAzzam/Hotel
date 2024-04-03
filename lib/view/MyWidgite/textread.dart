@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class ExpandableText extends StatefulWidget {
@@ -37,7 +38,7 @@ class _ExpandableTextState extends State<ExpandableText>
             children: [
               new TextButton(
                 style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.white),foregroundColor: MaterialStatePropertyAll(Color(0xff4C4DDC))),
-              child: const Text('Read More ...'),
+              child:  Text("Read More ...".tr),
               onPressed: () => setState(() => widget.isExpanded = true)),
             ],
           )
