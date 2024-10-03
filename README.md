@@ -1,6 +1,7 @@
 <<<<<<< HEAD
-# hotel
-You Can Download Backend For This Project In :
+# Hotel
+
+**You Can Download Backend For This Project In :**
 
 ENG.FaiezShamsAldeen:  https://github.com/faiezsh/Hotel.git
 
